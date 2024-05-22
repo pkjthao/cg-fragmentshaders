@@ -144,7 +144,7 @@ onMounted(() => {
     data.materials.custom = createShaderMaterial('custom', data.scene);
 
     // Create video textures
-    data.textures.video = new VideoTexture('video', BASE_URL + 'videos/dm_vector.mp4', data.scene, false,
+    data.textures.video = new VideoTexture('video', BASE_URL + 'videos/disney_clip.mp4', data.scene, false,
                                            false, VideoTexture.BILINEAR_SAMPLINGMODE, 
                                            {autoUpdateTexture: true, autoPlay: true, loop: true, muted: true});
 
@@ -183,6 +183,7 @@ onMounted(() => {
     rect.material = data.materials.standard;
 
     // Animation function - called before each frame gets rendered
+    let time = 0.0;
     data.scene.onBeforeRenderObservable.add(() => {
         if (data.filter !== rect.material.name) {
             rect.material = data.materials[data.filter];
@@ -190,6 +191,10 @@ onMounted(() => {
 
         if (data.textures[data.selected_texture] !== null) {
             data.materials[data.filter].setTexture('image', data.textures[data.selected_texture]);
+
+            let delta_time = (1.0 / 60.0) * data.scene.getAnimationRatio();
+            time += delta_time;
+            data.materials[data.filter].setFloat("time", time);
         }
     });
 
