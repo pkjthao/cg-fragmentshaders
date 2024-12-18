@@ -4,10 +4,10 @@ This project involves creating fun  visual effects by manipulating textures usin
 
 To run this code you must have Node.js already installed. Clone the repository and open it in your desired IDE and run:
 ```
-npm install -g http-server
+npm install
 ```
 to install the required packages. Lastly run:
 ```
-http-server
+npm run dev
 ```
 to start the server.
